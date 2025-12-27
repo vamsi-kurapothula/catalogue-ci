@@ -16,7 +16,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     parameters {
-       string(name: 'deploy', defaultValue: false, description: 'Toggle this value') 
+       string(name: 'deploy', defaultValue: 'false', description: 'Toggle this value') 
        choice(name: 'deploy_to', choices: ['dev', 'qa', 'prod'], description: 'Pick the environment')
     } 
 }
