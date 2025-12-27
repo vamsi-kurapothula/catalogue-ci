@@ -19,7 +19,7 @@ pipeline {
        string(name: 'deploy', defaultValue: 'false', description: 'Toggle this value') 
        choice(name: 'deploy_to', choices: ['dev', 'qa', 'prod'], description: 'Pick the environment')
     } 
-}
+
 // build
     
     stages {
@@ -72,8 +72,9 @@ pipeline {
                }
             }
         }
+    }
 
-      post { 
+    post { 
         always { 
             echo 'I will always say Hello again!'
              cleanWs() 
