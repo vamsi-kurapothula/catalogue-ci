@@ -63,7 +63,7 @@ pipeline {
                script{
                     build job: 'catalogue-cd',
                     parameters: [
-                          string(name: 'appVersion', value: "${appVersion}") ,
+                          string(name: 'appVersion', value: appVersion) ,
                           choice(name: 'deploy_to', value: ['dev'] )
                       ],
                         wait: false, // vpc will not wait for sg pipeline completion
