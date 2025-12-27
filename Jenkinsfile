@@ -54,24 +54,24 @@ pipeline {
             }
         }
         stage('Trigger Deploy') {
-            when {
-                expression {
-                    return params.DEPLOY_ENV == 'dev'
+                when {
+                    expression { params.deploy_to == 'dev' }
                 }
-            }
-            steps {
-               script{
-                    build job: 'catalogue-cd',
-                    parameters: [
-                          string(name: 'appVersion', value: appVersion) ,
-                          choice(name: 'deploy_to', value: ['dev'] )
-                      ],
-                        wait: false, // vpc will not wait for sg pipeline completion
-                        propagate: false // even sg fails vpc will not be affected
-                            
-               }
-            }
+                steps {
+                    script {
+                        build(
+                            job: 'catalogue-cd',
+                            parameters: [
+                                string(name: 'appVersion', value: appVersion),
+                                string(name: 'deploy_to', value: params.deploy_to)
+                            ],
+                            wait: false,       // CI will not wait for CD completion
+                            propagate: false   // CD failure will not fail CI
+                        )
+                    }
+                }
         }
+
     }
 
     post { 
