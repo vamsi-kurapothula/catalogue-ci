@@ -3,7 +3,7 @@
 def configMap = [
    greeting : "hello jenkins"
 ]
-sample(configMap)
+samplePipeline(configMap)
 
 
 
